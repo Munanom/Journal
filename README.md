@@ -1,5 +1,5 @@
 
-## See the app running [Here]([https://monances.vercel.app](https://journal-nu-jet.vercel.app/)
+## See the app running [Here]([https://journal-nu-jet.vercel.app/])
 First, run the development server:
 
 ```bash
