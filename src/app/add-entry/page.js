@@ -1,9 +1,11 @@
 'use client';
 import React, { useContext } from 'react';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import { EntriesContext } from '../../context/EntriesContext';
-import EntryForm from '../../components/EntryForm';
 import styles from '../page.module.css';
+
+const EntryForm = dynamic(() => import('../../components/EntryForm'), { ssr: false });
 
 const AddEntryPage = () => {
   const router = useRouter();
@@ -27,4 +29,3 @@ const AddEntryPage = () => {
 };
 
 export default AddEntryPage;
-
