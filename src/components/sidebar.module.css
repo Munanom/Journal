@@ -1,0 +1,35 @@
+.sidebar {
+  width: 250px; /* Adjusted width for better spacing */
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #f0f0f0; /* Subtle gray background */
+  padding: 20px;
+  border-top-right-radius: 15px; /* Curved top-right corner */
+  border-bottom-right-radius: 15px; /* Curved bottom-right corner */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+}
+
+.logo {
+  height: 32px;
+  margin: 16px 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 8px; /* Rounded corners for logo area */
+}
+
+/* Style for Menu items */
+.ant-menu-item {
+  margin: 10px 0; /* Space between menu items */
+  border-radius: 8px; /* Rounded corners for menu items */
+}
+
+/* Hover and active state */
+.ant-menu-item:hover, .ant-menu-item-selected {
+  background-color: #CBC3E3; /* Lighter gray for hover/selected state */
+}
+
+/* Icon color */
+.ant-menu-item-icon {
+  color: #CBC3E3; /* Subtle gray color for icons */
+}

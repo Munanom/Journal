@@ -1,0 +1,50 @@
+.layout {
+  min-height: 100vh;
+  background-color: #f5f5f5; /* Light background color */
+}
+
+.content {
+  padding: 34px;
+  margin: 0 auto;
+  max-width: 1100px; /* Center content */
+}
+
+.todoContainer {
+  background: white;
+  border-radius: 10px;
+  padding: 70px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.addTaskContainer {
+  display: flex;
+  gap: 30px; /* Space between input and button */
+  margin-bottom: 16px;
+}
+
+.filterContainer {
+  display: flex;
+  gap: 30px; /* Space between filter and search */
+  margin-bottom: 16px;
+}
+
+.taskList {
+  margin-top: 50px;
+}
+
+.ant-modal {
+  border-radius: 8px;
+}
+
+.ant-modal-header {
+  border-bottom: none;
+}
+
+.ant-modal-footer {
+  border-top: none;
+}

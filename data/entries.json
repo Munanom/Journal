@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1722439809042,
+    "title": "The road",
+    "content": "<p>The road is murram</p>",
+    "date": "2024-07-30T21:00:00.000Z",
+    "mood": "happy"
+  },
+  {
+    "id": 1722439834628,
+    "title": "the last meal",
+    "content": "<p>the food was delicious</p>",
+    "date": "2024-07-30T21:00:00.000Z",
+    "mood": "excited"
+  },
+  {
+    "id": 1722445256487,
+    "title": "Sad Journey",
+    "content": "<p>i have to walk all the way to shss</p>",
+    "date": "2024-07-24T21:00:00.000Z",
+    "mood": "sad"
+  },
+  {
+    "id": 1722445303837,
+    "title": "openai",
+    "content": "<p>i have to pay for their credits</p>",
+    "date": "2024-07-30T21:00:00.000Z",
+    "mood": "angry"
+  },
+  {
+    "id": 1722532879066,
+    "title": "The call",
+    "content": "<p>The interview call</p>",
+    "date": "2024-08-01T21:00:00.000Z",
+    "mood": "anxious"
+  }
+]
