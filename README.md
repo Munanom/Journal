@@ -1,34 +1,21 @@
 
 ## See the app running [Here][https://journal-nu-jet.vercel.app/]
-First, run the development server:
+# Journal
+## Overview
+The Journal App is a simple journaling application built using Next.js 13, React, and JavaScript. Users can create and manage diary entries, track their mood, and reflect on their daily experiences. It features an interactive diary system with an integrated calendar, a mood tracker, a to-do list (optional), and the ability to analyze and visualize mood trends using a pie chart.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Key Features
+- **Create Diary Entries**: Record your daily thoughts, events, and reflections.
+- **Mood Tracking**: Track your mood for each diary entry, with analysis and visual representation.
+- **Highlight and Reflection**: Reflect on the highlights of your day and save them for review.
+- **Entry Management**: View, edit, and delete your diary entries as needed.
+- **Calendar Integration**: Quickly pick dates for your entries and view past reflections.
+- **Profile Page**: Customize and view your user profile with the ability to upload and display a profile picture.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
+-  Create an Entry: Navigate to the "Data Entry" section and fill in your diary entry with the mood and content fields. You can also specify the date using the calendar.
+- Track Your Mood: Go to the "About My Day" section and select your mood and highlight of the day. Save it to see your mood analysis.
+- View Entries: Navigate to the "Diary List" section to see all your entries, edit or delete them if needed.
+- Profile Management: Update your profile information on the "Profile" page, including uploading a profile picture.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  
