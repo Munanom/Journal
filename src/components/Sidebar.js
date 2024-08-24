@@ -4,7 +4,7 @@ import { Menu } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import styles from './Sidebar.module.css';
+import styles from './sidebar.module.css';
 
 const Sidebar = () => {
   const router = useRouter();
