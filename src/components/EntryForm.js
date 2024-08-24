@@ -1,12 +1,11 @@
 'use client';
 
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, DatePicker, Select, Input } from 'antd';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css'; 
 import dayjs from 'dayjs';
 import styles from '../app/page.module.css';
-
 
 import Quill from 'quill';
 import 'react-quill/dist/quill.snow.css';
@@ -122,14 +121,16 @@ const EntryForm = ({ initialTitle = '', initialContent = '', initialDate = null,
 
   return (
     <Form onFinish={handleSubmit} className={styles.form}>
-      <Form.Item label="Title" required>
+      <Form.Item>
+        <h3>Title</h3>
         <Input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Enter a title for your entry"
         />
       </Form.Item>
-      <Form.Item label="Date">
+      <Form.Item>
+        <h3>Date</h3>
         <DatePicker
           value={date}
           onChange={(value) => setDate(value)}
@@ -137,7 +138,8 @@ const EntryForm = ({ initialTitle = '', initialContent = '', initialDate = null,
           style={{ width: '100%' }}
         />
       </Form.Item>
-      <Form.Item label="Mood">
+      <Form.Item>
+        <h3>Mood</h3>
         <Select
           value={mood}
           onChange={(value) => setMood(value)}
@@ -151,7 +153,8 @@ const EntryForm = ({ initialTitle = '', initialContent = '', initialDate = null,
           <Option value="anxious">Anxious</Option>
         </Select>
       </Form.Item>
-      <Form.Item label="Content">
+      <Form.Item>
+        <h3>Content</h3>
         <QuillNoSSRWrapper
           value={content}
           placeholder="Start writing..."
