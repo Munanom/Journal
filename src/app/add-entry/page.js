@@ -1,11 +1,10 @@
 'use client';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useRouter } from 'next/navigation';
-import dynamic from 'next/dynamic';
+import EntryForm from '../../components/EntryForm';
 import { EntriesContext } from '../../context/EntriesContext';
+import ProtectedRoute from '../../components/ProtectedRoute';
 import styles from '../page.module.css';
-
-const EntryForm = dynamic(() => import('../../components/EntryForm'), { ssr: false });
 
 const AddEntryPage = () => {
   const router = useRouter();
@@ -13,18 +12,26 @@ const AddEntryPage = () => {
 
   const handleAddEntry = async (entry) => {
     const newEntry = {
-      id: Date.now(),
       ...entry,
-      date: entry.date ? entry.date.toISOString() : new Date().toISOString(),
+      date: new Date().toISOString(),
     };
+
+    try {
     await addEntry(newEntry);
     router.push('/entries');
+    } catch (error) {
+      console.error('Failed to add entry:', error);
+      // You might want to show an error message to the user here
+    }
   };
 
   return (
-    <div className={styles.formContainer}>
+    <ProtectedRoute>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Add New Entry</h1>
       <EntryForm onSubmit={handleAddEntry} />
     </div>
+    </ProtectedRoute>
   );
 };
 

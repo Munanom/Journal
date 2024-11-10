@@ -1,63 +1,61 @@
-import { createContext, useState } from 'react';
-import { notification } from 'antd';
-
+'use client';
+import { createContext, useState, useEffect } from 'react';
+import { getEntries, addEntry as addEntryToFirebase, updateEntry as updateEntryInFirebase, deleteEntry as deleteEntryFromFirebase } from '../firebase/firestore';
+import { useAuth } from './AuthContext';
 export const EntriesContext = createContext();
 
 export const EntriesProvider = ({ children }) => {
   const [entries, setEntries] = useState([]);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+        fetchEntries();
+      }
+  }, [user]);
 
   const fetchEntries = async () => {
     try {
-      const response = await fetch('/api/entries');
-      const data = await response.json();
-      setEntries(data);
+      const fetchedEntries = await getEntries(user.uid);
+      setEntries(fetchedEntries);
     } catch (error) {
-      notification.error({ message: 'Error', description: 'Failed to fetch entries' });
-    }
-  };
-
-  const saveEntries = async (updatedEntries) => {
-    try {
-      const response = await fetch('/api/entries', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedEntries),
-      });
-      if (response.ok) {
-        setEntries(updatedEntries);
-        notification.success({ message: 'Success', description: 'Entries updated successfully' });
-      } else {
-        notification.error({ message: 'Error', description: 'Failed to update entries' });
-      }
-    } catch (error) {
-      notification.error({ message: 'Error', description: 'Failed to update entries' });
+      console.error('Failed to fetch entries:', error);
     }
   };
 
   const addEntry = async (entry) => {
     try {
-      const response = await fetch('/api/entries', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(entry),
-      });
-      if (response.ok) {
-        fetchEntries();
-        notification.success({ message: 'Success', description: 'Entry added successfully' });
-      } else {
-        notification.error({ message: 'Error', description: 'Failed to add entry' });
-      }
+      const newEntry = await addEntryToFirebase(user.uid, entry);
+      setEntries([...entries, newEntry]);
+      return newEntry;
     } catch (error) {
-      notification.error({ message: 'Error', description: 'Failed to add entry' });
+      console.error('Failed to add entry:', error);
+      throw error;
+    }
+  };
+
+  const updateEntry = async (id, updatedEntry) => {
+    try {
+      await updateEntryInFirebase(user.uid, id, updatedEntry);
+      setEntries(entries.map(entry => entry.id === id ? { ...entry, ...updatedEntry } : entry));
+    } catch (error) {
+      console.error('Failed to update entry:', error);
+      throw error;
+    }
+};
+
+  const deleteEntry = async (id) => {
+    try {
+      await deleteEntryFromFirebase(user.uid, id);
+      setEntries(entries.filter(entry => entry.id !== id));
+    } catch (error) {
+      console.error('Failed to delete entry:', error);
+      throw error;
     }
   };
 
   return (
-    <EntriesContext.Provider value={{ entries, fetchEntries, saveEntries, addEntry }}>
+    <EntriesContext.Provider value={{ entries, addEntry, updateEntry, deleteEntry }}>
       {children}
     </EntriesContext.Provider>
   );

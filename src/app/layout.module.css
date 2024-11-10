@@ -1,10 +1,30 @@
-.layout {
-    display: flex;
-  }
-  
-  .content {
-    margin-left: 200px;
-    padding: 20px;
-    width: 100%;
-  }
-  
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.authPage {
+  padding: 0;
+  width: 100%;
+  background-image: url('/journalpng.svg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.authPage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(8px);
+  z-index: -1;
+}

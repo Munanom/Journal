@@ -1,116 +1,85 @@
 'use client';
-
 import { useState } from 'react';
+import { signUpWithEmail, signInWithGoogle } from '../../firebase/auth';
 import { useRouter } from 'next/navigation';
-import { Form, Input, Button, Space, notification, Typography } from 'antd';
-import { EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
-import Image from 'next/image';
-import styles from '../page.module.css';
+import Link from 'next/link';
+import styles from '../Auth.module.css';
 
-const SignupPage = () => {
-  const [username, setUsername] = useState('');
+export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState(null);
   const router = useRouter();
 
-  const handleSignup = async () => {
+  const handleEmailSignup = async (e) => {
+    e.preventDefault();
     if (password !== confirmPassword) {
-      notification.error({
-        message: 'Error',
-        description: 'Passwords do not match!',
-      });
+      setError("Passwords don't match");
       return;
     }
-
     try {
-      const existingUserResponse = await fetch(`/api/check-email?email=${email}`);
-      const existingUserData = await existingUserResponse.json();
-
-      if (existingUserData.exists) {
-        notification.error({
-          message: 'Error',
-          description: 'Email already exists. Please choose a new email.',
-        });
-        return;
-      }
-
-      const response = await fetch('/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, email, password }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        notification.success({
-          message: 'Success',
-          description: 'Signup successful! Redirecting to login page...',
-        });
-        router.push('/login'); // Redirect to the login page
-      } else {
-        notification.error({
-          message: 'Error',
-          description: data.message,
-        });
-      }
+      await signUpWithEmail(email, password);
+      router.push('/entries');
     } catch (error) {
-      notification.error({
-        message: 'Error',
-        description: 'An unexpected error occurred. Please try again.',
-      });
+      setError(error.message);
+    }
+  };
+
+  const handleGoogleSignup = async () => {
+    try {
+      await signInWithGoogle();
+      router.push('/entries');
+    } catch (error) {
+      setError(error.message);
     }
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.formContainer}>
-        <h1 className={styles.title}>Signup</h1>
-        <Form onFinish={handleSignup}>
-          <Space direction="vertical" style={{ width: '100%' }}>
-            <Form.Item label={<Typography.Text style={{ color: 'white' }}>Username</Typography.Text>} required>
-              <Input value={username} onChange={(e) => setUsername(e.target.value)} placeholder='username' />
-            </Form.Item>
-            <Form.Item label={<Typography.Text style={{ color: 'white' }}>Email</Typography.Text>} required>
-              <Input value={email} onChange={(e) => setEmail(e.target.value)} placeholder='email' />
-            </Form.Item>
-            <Form.Item label={<Typography.Text style={{ color: 'white' }}>Password</Typography.Text>} required>
-              <Input.Password
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Input password"
-              />
-            </Form.Item>
-            <Form.Item label={<Typography.Text style={{ color: 'white' }}>Confirm Password</Typography.Text>} required>
-              <Input.Password
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm password"
-                iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-              />
-            </Form.Item>
-            <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Sign Up
-              </Button>
-            </Form.Item>
-          </Space>
-        </Form>
-      </div>
-      <div className={styles.imageContainer}>
-        <Image
-          className={styles.logo}
-          src="/journalpng.svg"
-          alt="Journal Logo"
-          width={600}
-          height={270}
-          priority
-        />
+    <div className={styles.authContainer}>
+      <div className={styles.authBox}>
+        <h1 className={styles.title}>Sign Up</h1>
+        <form onSubmit={handleEmailSignup} className={styles.form}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={styles.input}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className={styles.input}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className={styles.input}
+            required
+          />
+          <button type="submit" className={styles.button}>
+            Sign up with Email
+          </button>
+        </form>
+        <div className={styles.divider}>
+          <span>or</span>
+        </div>
+        <button className={styles.googleButton} onClick={handleGoogleSignup}>
+          Sign up with Google
+        </button>
+        <p className={styles.toggleText}>
+          Already have an account?
+          <Link href="/login" className={styles.link}> Log in</Link>
+        </p>
+        {error && <p className={styles.errorText}>{error}</p>}
       </div>
     </div>
   );
-};
-
-export default SignupPage;
+}

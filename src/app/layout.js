@@ -1,27 +1,34 @@
-'use client'; // Ensure this is at the top
-
-import './globals.css'; // Import your global CSS
+import './globals.css';
 import Sidebar from '../components/Sidebar';
-import { EntriesProvider } from '../context/EntriesContext';
 import styles from './layout.module.css';
+import { Inter } from 'next/font/google';
+import { AuthProvider } from '../context/AuthContext';
+import { EntriesProvider } from '../context/EntriesContext';
+import ErrorBoundary from '../components/ErrorBoundary';
+import { metadata } from './metadata';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export { metadata };
 
 export default function RootLayout({ children }) {
+  const isAuthPage = ['login', 'signup'].includes(children.props.childPropSegment);
+
   return (
     <html lang="en">
-      <head>
-        <title>MyJournal</title>
-        <meta name="description" content="Journal App" />
-        <link rel="icon" href="public/favicon_io/favicon1.ico" />
-      </head>
-      <body>
-        <EntriesProvider>
-          <div className={styles.layout}>
-            <Sidebar />
-            <div className={styles.content}>
-              {children}
-            </div>
-          </div>
-        </EntriesProvider>
+      <body className={inter.className}>
+        <AuthProvider>
+          <EntriesProvider>
+            <ErrorBoundary>
+        <div className={styles.container}>
+          {!isAuthPage && <Sidebar />}
+          <main className={`${styles.main} ${isAuthPage ? styles.authPage : ''}`}>
+            {children}
+          </main>
+        </div>
+            </ErrorBoundary>
+          </EntriesProvider>
+        </AuthProvider>
       </body>
     </html>
   );
