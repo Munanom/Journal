@@ -5,7 +5,18 @@
 
 .main {
   flex-grow: 1;
-  padding: 20px;
+  margin-left: 250px; /* Width of the sidebar */
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  width: calc(100% - 250px);
+  overflow-x: hidden;
+}
+
+.pageContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .authPage {
@@ -27,4 +38,12 @@
   background: inherit;
   filter: blur(8px);
   z-index: -1;
+}
+
+@media (max-width: 768px) {
+  .main {
+    margin-left: 0;
+    width: 100%;
+    padding: 1rem;
+  }
 }

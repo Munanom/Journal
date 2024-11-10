@@ -1,6 +1,6 @@
 import './globals.css';
-import Sidebar from '../components/Sidebar';
 import styles from './layout.module.css';
+import Sidebar from '../components/Sidebar';
 import { Inter } from 'next/font/google';
 import { AuthProvider } from '../context/AuthContext';
 import { EntriesProvider } from '../context/EntriesContext';
@@ -23,9 +23,11 @@ export default function RootLayout({ children }) {
         <div className={styles.container}>
           {!isAuthPage && <Sidebar />}
           <main className={`${styles.main} ${isAuthPage ? styles.authPage : ''}`}>
+                  <div className={styles.pageContainer}>
             {children}
-          </main>
-        </div>
+                  </div>
+                </main>
+              </div>
             </ErrorBoundary>
           </EntriesProvider>
         </AuthProvider>

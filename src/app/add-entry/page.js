@@ -28,7 +28,7 @@ const AddEntryPage = () => {
   return (
     <ProtectedRoute>
       <div className={styles.container}>
-        <h1 className={styles.title}>Add New Entry</h1>
+        <h1 className={styles.title}></h1>
       <EntryForm onSubmit={handleAddEntry} />
     </div>
     </ProtectedRoute>
