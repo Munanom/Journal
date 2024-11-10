@@ -5,45 +5,28 @@
 
 .main {
   flex-grow: 1;
-  margin-left: 250px; /* Width of the sidebar */
-  padding: 3rem 4rem; /* Increased padding */
-  background-color: #f8f9fa;
+  margin-left: 250px; /* Sidebar width */
+  padding: 0;
   min-height: 100vh;
-  width: calc(100% - 250px);
-  overflow-x: hidden;
+  background: var(--background-primary);
+  transition: margin-left 0.3s ease;
 }
 
 .pageContainer {
-  max-width: 1200px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 40px; /* Increased padding */
-}
-
-.authPage {
-  padding: 0;
+  padding: 2rem;
   width: 100%;
-  background-image: url('/journalpng.svg');
-  background-size: cover;
-  background-position: center;
-  position: relative;
 }
 
-.authPage::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: inherit;
-  filter: blur(8px);
-  z-index: -1;
-}
-
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .main {
     margin-left: 0;
-    width: 100%;
-    padding: 2rem;
+    padding: 1rem;
+  }
+
+  .pageContainer {
+    padding: 1rem;
   }
 }

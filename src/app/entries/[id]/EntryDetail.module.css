@@ -1,0 +1,183 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .entryHeader {
+    margin-bottom: 2rem;
+  }
+  
+  .backButton {
+    padding: 0.8rem 1.5rem;
+    background: none;
+    border: 2px solid #777ae8;
+    color: #777ae8;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  
+  .backButton:hover {
+    background: #777ae8;
+    color: white;
+    transform: translateX(-4px);
+  }
+  
+  .metadata {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    color: #666;
+    font-size: 0.95rem;
+  }
+  
+  .date {
+    color: #666;
+  }
+  
+  .mood {
+    padding: 0.4rem 0.8rem;
+    background: #f0f1fe;
+    color: #777ae8;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .entryContent {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+  
+  .location,
+  .weather {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #2c3e50;
+    margin: 2rem 0;
+  }
+  
+  .content p {
+    margin-bottom: 1.5rem;
+  }
+  
+  .content h1,
+  .content h2,
+  .content h3 {
+    margin: 2rem 0 1rem;
+    color: #2c3e50;
+  }
+  
+  .content blockquote {
+    border-left: 4px solid #777ae8;
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: #666;
+    font-style: italic;
+  }
+  
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .tag {
+    padding: 0.4rem 0.8rem;
+    background: #f0f1fe;
+    color: #777ae8;
+    border-radius: 15px;
+    font-size: 0.9rem;
+  }
+  
+  .loading,
+  .error {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .error {
+    color: #ff6b6b;
+  }
+  
+  /* Dark Mode Support */
+  @media (prefers-color-scheme: dark) {
+    .entryContent {
+      background: #2c3e50;
+    }
+  
+    .title {
+      color: #ecf0f1;
+    }
+  
+    .content {
+      color: #ecf0f1;
+    }
+  
+    .content h1,
+    .content h2,
+    .content h3 {
+      color: #ecf0f1;
+    }
+  
+    .date,
+    .location,
+    .weather {
+      color: #ccc;
+    }
+  
+    .loading,
+    .error {
+      background: #2c3e50;
+      color: #ecf0f1;
+    }
+  
+    .tag {
+      background: #34495e;
+      color: #ecf0f1;
+    }
+  
+    .content blockquote {
+      color: #ccc;
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+  
+    .title {
+      font-size: 2rem;
+    }
+  
+    .entryContent {
+      padding: 1.5rem;
+    }
+  }
+  

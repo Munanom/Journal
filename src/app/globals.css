@@ -1,268 +1,207 @@
 :root {
-  --primary-color: #3498db;
+  /* Base colors */
+  --primary-color: #777ae8;
+  --primary-hover: #6366e5;
   --secondary-color: #2c3e50;
-  --text-color: #333;
-  --background-color: #f8f9fa;
-  --error-color: #e74c3c;
-  --success-color: #2ecc71;
-  --border-color: #ddd;
-  --max-width: 1200px;
-  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  
+  /* Light theme defaults */
+  --background-primary: #f8f9fa;
+  --background-secondary: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #666666;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --card-background: #ffffff;
+  --hover-background: #f0f1fe;
+  
+  /* Component specific */
+  --sidebar-width: 250px;
+  --header-height: 60px;
+  --border-radius: 12px;
+  --transition-speed: 0.3s;
+}
+
+[data-theme='dark'] {
+  --background-primary: #1a1a1a;
+  --background-secondary: #2c3e50;
+  --text-primary: #ecf0f1;
+  --text-secondary: #b8bcc2;
+  --border-color: #455d7a;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --card-background: #2c3e50;
+  --hover-background: #34495e;
 }
 
 * {
   box-sizing: border-box;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 html,
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  max-width: 100vw;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  color: var(--text-primary);
+  background: var(--background-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+    'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
-  color: var(--text-color);
-  background-color: var(--background-color);
+  transition: background-color var(--transition-speed) ease,
+              color var(--transition-speed) ease;
 }
 
+/* Typography */
 h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
   margin-bottom: 1rem;
-  color: var(--secondary-color);
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+p {
+  margin-bottom: 1rem;
 }
 
-.page-container {
-  padding: 2rem;
-  max-width: var(--max-width);
-  margin: 0 auto;
+/* Links */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
 }
 
+a:hover {
+  color: var(--primary-hover);
+}
+
+/* Cards */
 .card {
-  background: white;
-  border-radius: 10px;
-  padding: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1.5rem;
-  transition: box-shadow 0.3s;
+  background: var(--card-background);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  transition: transform var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease;
 }
 
 .card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
 }
-  
+
+/* Buttons */
 .button {
   padding: 0.8rem 1.5rem;
-  border: none;
   border-radius: 8px;
-  background-color: var(--primary-color);
-  color: white;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-  
-.button:hover {
-  background-color: #2980b9;
-}
-
-.button.secondary {
-  background-color: var(--secondary-color);
-}
-
-.button.secondary:hover {
-  background-color: #34495e;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-label {
-  display: block;
-  margin-bottom: 0.5rem;
+  transition: all var(--transition-speed) ease;
   font-weight: 500;
 }
 
-.form-input {
-  width: 100%;
+.button-primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.button-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.button-secondary {
+  background: var(--background-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.button-secondary:hover {
+  background: var(--hover-background);
+}
+
+/* Form Elements */
+input, select, textarea {
   padding: 0.8rem;
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  font-size: 1rem;
+  background: var(--background-secondary);
+  color: var(--text-primary);
+  transition: border-color var(--transition-speed) ease;
 }
 
-.form-input:focus {
+input:focus, select:focus, textarea:focus {
   outline: none;
   border-color: var(--primary-color);
 }
 
-.grid {
-  display: grid;
-  gap: 1.5rem;
+/* Quill Editor Customization */
+.ql-container.ql-snow {
+  border: 1px solid var(--border-color) !important;
+  border-top: none !important;
+  background: var(--card-background);
+  color: var(--text-primary);
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
 }
 
-.grid-2 {
-  grid-template-columns: repeat(2, 1fr);
+.ql-toolbar.ql-snow {
+  border: 1px solid var(--border-color) !important;
+  background: var(--background-secondary);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
 }
 
-.grid-3 {
-  grid-template-columns: repeat(3, 1fr);
+.ql-editor {
+  min-height: 200px;
+  font-size: 1rem !important;
+  color: var(--text-primary);
 }
 
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding: 4rem 0;
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.floatButton {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: var(--primary-color);
-  color: #fff;
-  font-size: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+::-webkit-scrollbar-track {
+  background: var(--background-primary);
 }
 
-/* Layout Styles */
-.layout {
-  display: flex;
-  min-height: 100vh;
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
 }
 
-.sidebar {
-  width: 250px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: white;
-  padding: 20px;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-
-.content {
-  flex: 1;
-  padding: 20px;
-  margin-left: 250px;
-  background-color: var(--background-color);
-  min-height: 100vh;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.fade-in {
-  animation: fadeIn 0.3s ease-in;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-hover);
 }
 
 /* Utilities */
-.text-center { text-align: center; }
 .mt-1 { margin-top: 0.5rem; }
 .mt-2 { margin-top: 1rem; }
 .mt-3 { margin-top: 1.5rem; }
 .mt-4 { margin-top: 2rem; }
+
 .mb-1 { margin-bottom: 0.5rem; }
 .mb-2 { margin-bottom: 1rem; }
 .mb-3 { margin-bottom: 1.5rem; }
 .mb-4 { margin-bottom: 2rem; }
 
-/* Media Queries */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .grid-2,
-  .grid-3 {
-    grid-template-columns: 1fr;
+  :root {
+    --sidebar-width: 0px;
   }
 
-  .page-container {
+  .card {
     padding: 1rem;
   }
-  
-  .sidebar {
-    width: 200px;
-  }
 
-  .content {
-    margin-left: 0;
-  }
-}
-
-/* Quill Editor Styles */
-.ql-toolbar.ql-snow {
-  border: none !important;
-  border-bottom: 1px solid #e0e0e0 !important;
-  background: #f8f9fa;
-  padding: 0.8rem !important;
-}
-
-.ql-container.ql-snow {
-  border: none !important;
-  font-family: inherit !important;
-}
-
-.ql-editor {
-  min-height: 300px;
-  font-size: 1.1rem !important;
-  line-height: 1.6 !important;
-  padding: 1rem !important;
-}
-
-.ql-editor.ql-blank::before {
-  color: #999 !important;
-  font-style: normal !important;
-  font-size: 1.1rem !important;
-}
-
-/* Dark mode support for Quill */
-@media (prefers-color-scheme: dark) {
-  .ql-toolbar.ql-snow {
-    background: #34495e !important;
-    border-color: #455d7a !important;
-  }
-
-  .ql-container.ql-snow {
-    background: #2c3e50 !important;
-  }
-
-  .ql-editor {
-    color: white !important;
-  }
-
-  .ql-editor.ql-blank::before {
-    color: #666 !important;
-  }
-
-  .ql-snow .ql-stroke {
-    stroke: #ccc !important;
-  }
-
-  .ql-snow .ql-fill {
-    fill: #ccc !important;
-  }
-
-  .ql-snow .ql-picker {
-    color: #ccc !important;
-  }
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.3rem; }
 }
