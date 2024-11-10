@@ -28,6 +28,7 @@ export default function TodoList() {
   const [view, setView] = useState('grid'); // grid or list
   const [sortBy, setSortBy] = useState('dueDate'); // dueDate, priority, category
   const { user } = useAuth();
+  
 
   const categories = [
     { value: 'personal', label: 'Personal', icon: '👤' },

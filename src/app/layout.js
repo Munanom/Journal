@@ -1,31 +1,26 @@
 import './globals.css';
 import styles from './layout.module.css';
-import Sidebar from '../components/Sidebar';
-import ThemeToggle from '../components/ThemeToggle';
-import { Inter } from 'next/font/google';
 import { AuthProvider } from '../context/AuthContext';
-import { ThemeProvider } from '../context/ThemeContext';
-import ErrorBoundary from '../components/ErrorBoundary';
+import { Providers } from './providers';
 
-const inter = Inter({ subsets: ['latin'] });
+export const metadata = {
+  title: 'Journal App',
+  description: 'A personal journaling application',
+};
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <AuthProvider>
-          <ThemeProvider>
-            <ErrorBoundary>
-              <div className={styles.container}>
-                <Sidebar />
-                <main className={styles.main}>
-                  {children}
-                </main>
-                <ThemeToggle />
+      <body>
+        <Providers>
+          <div className={styles.container}>
+            <main className={styles.main}>
+              <div className={styles.pageContainer}>
+                {children}
               </div>
-            </ErrorBoundary>
-          </ThemeProvider>
-        </AuthProvider>
+            </main>
+          </div>
+        </Providers>
       </body>
     </html>
   );

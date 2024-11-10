@@ -8,20 +8,48 @@ import styles from './MoodTracker.module.css';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
-// Dynamic imports for Charts
-const DynamicPieChart = dynamic(
+// Dynamic imports for Chart.js and necessary components
+import {
+  Chart as ChartJS,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js';
+
+// Initialize ChartJS on client side only
+if (typeof window !== 'undefined') {
+  ChartJS.register(
+    ArcElement,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+  );
+}
+
+const DynamicPie = dynamic(
   () => import('react-chartjs-2').then((mod) => mod.Pie),
-  { ssr: false, loading: () => <div className={styles.chartLoading}>Loading chart...</div> }
+  { ssr: false }
 );
 
-const DynamicBarChart = dynamic(
+const DynamicBar = dynamic(
   () => import('react-chartjs-2').then((mod) => mod.Bar),
-  { ssr: false, loading: () => <div className={styles.chartLoading}>Loading chart...</div> }
+  { ssr: false }
 );
 
-const DynamicLineChart = dynamic(
+const DynamicLine = dynamic(
   () => import('react-chartjs-2').then((mod) => mod.Line),
-  { ssr: false, loading: () => <div className={styles.chartLoading}>Loading chart...</div> }
+  { ssr: false }
 );
 
 // Dynamic import for Chart.js registration

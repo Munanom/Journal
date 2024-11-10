@@ -1,5 +1,4 @@
 export const metadata = {
-    title: 'MyJournal',
-    description: 'Journal App',
-  };
-  
+  title: 'Journal App',
+  description: 'A personal journaling application'
+};
