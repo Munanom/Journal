@@ -1,62 +1,92 @@
 'use client';
-import { createContext, useState, useEffect } from 'react';
-import { getEntries, addEntry as addEntryToFirebase, updateEntry as updateEntryInFirebase, deleteEntry as deleteEntryFromFirebase } from '../firebase/firestore';
-import { useAuth } from './AuthContext';
-export const EntriesContext = createContext();
 
-export const EntriesProvider = ({ children }) => {
+import { createContext, useContext, useState, useEffect } from 'react';
+import { collection, query, where, orderBy, getDocs, addDoc } from 'firebase/firestore';
+import { db } from '../firebase/config';
+import { useAuth } from './AuthContext';
+
+const EntriesContext = createContext();
+
+export function EntriesProvider({ children }) {
   const [entries, setEntries] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { user } = useAuth();
 
-  useEffect(() => {
-    if (user) {
-        fetchEntries();
-      }
-  }, [user]);
-
   const fetchEntries = async () => {
+    if (!user?.uid) {
+      setLoading(false);
+      return;
+    }
+
     try {
-      const fetchedEntries = await getEntries(user.uid);
-      setEntries(fetchedEntries);
+      console.log('Fetching entries for user:', user.uid);
+      const entriesRef = collection(db, 'entries');
+      const q = query(
+        entriesRef,
+        where('userId', '==', user.uid),
+        orderBy('createdAt', 'desc')
+      );
+
+      const querySnapshot = await getDocs(q);
+      const entriesData = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      
+      console.log('Fetched entries:', entriesData);
+      setEntries(entriesData);
     } catch (error) {
-      console.error('Failed to fetch entries:', error);
+      console.error('Error fetching entries:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const addEntry = async (entry) => {
+  const addEntry = async (entryData) => {
     try {
-      const newEntry = await addEntryToFirebase(user.uid, entry);
-      setEntries([...entries, newEntry]);
+      const entry = {
+        ...entryData,
+        userId: user.uid,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+
+      const docRef = await addDoc(collection(db, 'entries'), entry);
+      const newEntry = { id: docRef.id, ...entry };
+      
+      // Update local state
+      setEntries(prevEntries => [newEntry, ...prevEntries]);
+      
       return newEntry;
     } catch (error) {
-      console.error('Failed to add entry:', error);
+      console.error('Error adding entry:', error);
       throw error;
     }
   };
 
-  const updateEntry = async (id, updatedEntry) => {
-    try {
-      await updateEntryInFirebase(user.uid, id, updatedEntry);
-      setEntries(entries.map(entry => entry.id === id ? { ...entry, ...updatedEntry } : entry));
-    } catch (error) {
-      console.error('Failed to update entry:', error);
-      throw error;
-    }
-};
+  // Fetch entries when user changes
+  useEffect(() => {
+    fetchEntries();
+  }, [user]);
 
-  const deleteEntry = async (id) => {
-    try {
-      await deleteEntryFromFirebase(user.uid, id);
-      setEntries(entries.filter(entry => entry.id !== id));
-    } catch (error) {
-      console.error('Failed to delete entry:', error);
-      throw error;
-    }
+  const value = {
+    entries,
+    loading,
+    fetchEntries,
+    addEntry
   };
 
   return (
-    <EntriesContext.Provider value={{ entries, addEntry, updateEntry, deleteEntry }}>
+    <EntriesContext.Provider value={value}>
       {children}
     </EntriesContext.Provider>
   );
-};
+}
+
+export function useEntries() {
+  const context = useContext(EntriesContext);
+  if (context === undefined) {
+    throw new Error('useEntries must be used within an EntriesProvider');
+  }
+  return context;
+}

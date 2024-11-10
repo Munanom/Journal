@@ -6,7 +6,7 @@
 .main {
   flex-grow: 1;
   margin-left: 250px; /* Width of the sidebar */
-  padding: 2rem;
+  padding: 3rem 4rem; /* Increased padding */
   background-color: #f8f9fa;
   min-height: 100vh;
   width: calc(100% - 250px);
@@ -16,7 +16,7 @@
 .pageContainer {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 40px; /* Increased padding */
 }
 
 .authPage {
@@ -44,6 +44,6 @@
   .main {
     margin-left: 0;
     width: 100%;
-    padding: 1rem;
+    padding: 2rem;
   }
 }

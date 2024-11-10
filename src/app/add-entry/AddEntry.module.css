@@ -1,0 +1,796 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Header Section */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #2c3e50 0%, #777ae8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Form Layout */
+.form {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.titleWrapper {
+  margin-bottom: 2rem;
+}
+
+.titleInput {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.5rem;
+  border: none;
+  border-bottom: 2px solid #e0e0e0;
+  transition: border-color 0.3s ease;
+  background: transparent;
+}
+
+.titleInput:focus {
+  outline: none;
+  border-bottom-color: #777ae8;
+}
+
+/* Main Content Layout */
+.contentWrapper {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Mood Section */
+.moodSection {
+  background: #f8f9fa;
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.moodSection label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+  display: block;
+  font-weight: 500;
+}
+
+.moodGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.moodButton {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.moodButton:hover {
+  transform: translateY(-1px);
+  border-color: var(--mood-color);
+}
+
+.moodButton.selected {
+  background: var(--mood-color);
+  border-color: var(--mood-color);
+  color: white;
+}
+
+.moodEmoji {
+  font-size: 1.2rem;
+}
+
+.moodLabel {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.aiPromptButton {
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(135deg, #777ae8 0%, #6366e5 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.aiPromptButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(119, 122, 232, 0.2);
+}
+
+/* Metadata Section */
+.metadataSection {
+  background: #f8f9fa;
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.weatherSelect,
+.locationInput {
+  margin-bottom: 1rem;
+}
+
+.weatherSelect label,
+.locationInput label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.weatherSelect select,
+.locationInput input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.weatherSelect select:focus,
+.locationInput input:focus {
+  outline: none;
+  border-color: #777ae8;
+  box-shadow: 0 0 0 3px rgba(119, 122, 232, 0.1);
+}
+
+/* Tags Section */
+.tagsSection {
+  background: #f8f9fa;
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.tagsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.tagsHeader label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.showSuggestionsButton {
+  padding: 0.5rem 1rem;
+  background: #777ae8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.showSuggestionsButton:hover {
+  background: #6366e5;
+  transform: translateY(-1px);
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.8rem;
+  background: white;
+  border-radius: 8px;
+  min-height: 45px;
+  border: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.tagSuggestionsModal {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  margin-top: 0.5rem;
+  z-index: 1000;
+  border: 1px solid #e0e0e0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.tagCategory {
+  margin-bottom: 1rem;
+}
+
+.tagCategory:last-child {
+  margin-bottom: 0;
+}
+
+.categoryLabel {
+  font-size: 0.9rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  display: block;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tagSuggestion {
+  padding: 0.4rem 0.8rem;
+  background: #f0f1fe;
+  color: #777ae8;
+  border: none;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tagSuggestion:hover {
+  background: #777ae8;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.8rem;
+  background: #f0f1fe;
+  color: #777ae8;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  gap: 0.5rem;
+}
+
+.removeTag {
+  background: none;
+  border: none;
+  color: #777ae8;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.removeTag:hover {
+  opacity: 1;
+}
+
+.tagInput {
+  border: none;
+  padding: 0.5rem;
+  font-size: 0.95rem;
+  flex-grow: 1;
+  min-width: 120px;
+  background: transparent;
+}
+
+.tagInput:focus {
+  outline: none;
+}
+
+/* Editor Section */
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.aiSuggestion {
+  background: linear-gradient(to right, #f0f1fe, #ffffff);
+  border-left: 4px solid #777ae8;
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.suggestionLabel {
+  display: block;
+  font-size: 0.9rem;
+  color: #777ae8;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.editorWrapper {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+}
+
+.editorHeader {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.promptsToggle {
+  padding: 0.6rem 1rem;
+  background: none;
+  border: 1px solid #777ae8;
+  color: #777ae8;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.promptsToggle:hover {
+  background: #f0f1fe;
+  transform: translateY(-1px);
+}
+
+.promptsList {
+  padding: 1rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.promptItem {
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #2c3e50;
+  border: 1px solid #e0e0e0;
+  transition: all 0.2s ease;
+}
+
+.promptItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.editor {
+  min-height: 400px;
+}
+
+.editorFooter {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-top: 1px solid #e0e0e0;
+  background: #f8f9fa;
+}
+
+.charCount,
+.autoSaveStatus {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.autoSaveStatus {
+  color: #777ae8;
+}
+
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.submitButton,
+.cancelButton {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.submitButton {
+  background: #777ae8;
+  color: white;
+  border: none;
+  min-width: 120px;
+}
+
+.submitButton:hover {
+  background: #6366e5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(119, 122, 232, 0.2);
+}
+
+.submitButton:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.cancelButton {
+  background: white;
+  color: #666;
+  border: 2px solid #e0e0e0;
+  min-width: 120px;
+}
+
+.cancelButton:hover {
+  background: #f8f9fa;
+  transform: translateY(-2px);
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .form {
+    background: #2c3e50;
+  }
+
+  .moodSection,
+  .metadataSection,
+  .tagsSection {
+    background: #34495e;
+    border-color: #455d7a;
+  }
+
+  .moodButton {
+    background: #2c3e50;
+    border-color: #455d7a;
+    color: white;
+  }
+
+  .weatherSelect select,
+  .locationInput input,
+  .tagInput {
+    background: #2c3e50;
+    border-color: #455d7a;
+    color: white;
+  }
+
+  .tagSuggestionsModal {
+    background: #2c3e50;
+    border-color: #455d7a;
+  }
+
+  .categoryLabel {
+    color: #ecf0f1;
+  }
+
+  .tagSuggestion {
+    background: #34495e;
+    color: #ecf0f1;
+  }
+
+  .tag {
+    background: #34495e;
+    color: #ecf0f1;
+  }
+
+  .aiSuggestion {
+    background: linear-gradient(to right, #34495e, #2c3e50);
+    color: white;
+  }
+
+  .promptsList {
+    background: #34495e;
+  }
+
+  .promptItem {
+    background: #2c3e50;
+    border-color: #455d7a;
+    color: #ecf0f1;
+  }
+
+  .editorHeader,
+  .editorFooter {
+    background: #34495e;
+    border-color: #455d7a;
+  }
+
+  .promptsToggle {
+    color: #ecf0f1;
+    border-color: #455d7a;
+  }
+
+  .promptsToggle:hover {
+    background: #455d7a;
+  }
+
+  .charCount,
+  .autoSaveStatus {
+    color: #ecf0f1;
+  }
+
+  .cancelButton {
+    background: #34495e;
+    color: white;
+    border-color: #455d7a;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .contentWrapper {
+    grid-template-columns: 250px 1fr;
+  }
+}
+
+@media (max-width: 992px) {
+  .contentWrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    order: 2;
+  }
+
+  .mainContent {
+    order: 1;
+  }
+
+  .promptsList {
+    grid-template-columns: 1fr;
+  }
+
+  .moodGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .form {
+    padding: 1.5rem;
+  }
+
+  .moodGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .metadataSection {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .weatherSelect,
+  .locationInput {
+    width: 100%;
+  }
+
+  .tagSuggestionsModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-height: 80vh;
+    margin: 0;
+  }
+
+  .actionButtons {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+
+  .submitButton,
+  .cancelButton {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .titleInput {
+    font-size: 1.3rem;
+  }
+
+  .moodGrid {
+    gap: 0.4rem;
+  }
+
+  .moodButton {
+    padding: 0.5rem;
+  }
+
+  .moodEmoji {
+    font-size: 1rem;
+  }
+
+  .moodLabel {
+    font-size: 0.75rem;
+  }
+
+  .promptItem {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tagSuggestionsModal {
+  animation: slideIn 0.3s ease-out;
+}
+
+.promptsList {
+  animation: slideIn 0.3s ease-out;
+}
+
+.aiSuggestion {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  .tagSuggestionsModal,
+  .promptsList,
+  .aiSuggestion,
+  .moodButton,
+  .submitButton,
+  .cancelButton {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Loading States */
+.editorLoading {
+  padding: 2rem;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+  color: #666;
+}
+
+/* Print Styles */
+@media print {
+  .sidebar,
+  .actionButtons,
+  .editorFooter {
+    display: none;
+  }
+
+  .contentWrapper {
+    display: block;
+  }
+
+  .mainContent {
+    width: 100%;
+  }
+
+  .form {
+    box-shadow: none;
+  }
+}
+
+/* Focus Styles */
+.titleInput:focus-visible,
+.weatherSelect select:focus-visible,
+.locationInput input:focus-visible,
+.tagInput:focus-visible {
+  outline: 2px solid #777ae8;
+  outline-offset: 2px;
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+  .moodButton:hover,
+  .submitButton:hover,
+  .cancelButton:hover {
+    transform: none;
+  }
+
+  .deleteButton {
+    opacity: 1;
+  }
+}
+
+/* Scrollbar Styling */
+.tagSuggestionsModal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tagSuggestionsModal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.tagSuggestionsModal::-webkit-scrollbar-thumb {
+  background: #777ae8;
+  border-radius: 4px;
+}
+
+.tagSuggestionsModal::-webkit-scrollbar-thumb:hover {
+  background: #6366e5;
+}

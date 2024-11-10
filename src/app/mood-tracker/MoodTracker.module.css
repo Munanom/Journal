@@ -1,0 +1,348 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  /* Header Styles */
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #2c3e50 0%, #777ae8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .subtitle {
+    color: #666;
+    font-size: 1.1rem;
+  }
+  
+  /* Stats Grid */
+  .statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .statCard {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .statCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .statCard h3 {
+    color: #666;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+  }
+  
+  .statValue {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  /* Controls Section */
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .timeSelector,
+  .chartTypeSelector {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .timeButton,
+  .chartTypeButton {
+    padding: 0.8rem 1.5rem;
+    border: 2px solid #777ae8;
+    background: white;
+    color: #777ae8;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    min-width: 120px;
+  }
+  
+  .timeButton:hover,
+  .chartTypeButton:hover {
+    background: #f0f1fe;
+    transform: translateY(-2px);
+  }
+  
+  .timeButton.active,
+  .chartTypeButton.active {
+    background: #777ae8;
+    color: white;
+  }
+  
+  /* Chart Section */
+  .chartSection {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3rem;
+  }
+  
+  .chart {
+    max-width: 800px;
+    margin: 0 auto;
+    height: 400px;
+    position: relative;
+  }
+  
+  .chartTooltip {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .noData {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+  }
+  
+  .addEntryButton {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    background: #777ae8;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .addEntryButton:hover {
+    background: #6366e5;
+    transform: translateY(-2px);
+  }
+  
+  /* Mood Grid */
+  .moodGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .moodCard {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+  
+  .moodCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .moodCard.selected {
+    border: 2px solid #777ae8;
+    background: #f0f1fe;
+  }
+  
+  .moodEmoji {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  
+  .moodCard h3 {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+  
+  .moodCard p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .moodCount {
+    font-size: 0.9rem;
+    color: #777ae8;
+    font-weight: 500;
+  }
+  
+  /* Loading and Unauthorized States */
+  .loading,
+  .unauthorized {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .loginButton {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    background: #777ae8;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .loginButton:hover {
+    background: #6366e5;
+    transform: translateY(-2px);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .container > * {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+  
+    .header h1 {
+      font-size: 2rem;
+    }
+  
+    .statsGrid {
+      grid-template-columns: 1fr;
+    }
+  
+    .timeSelector,
+    .chartTypeSelector {
+      flex-direction: column;
+    }
+  
+    .timeButton,
+    .chartTypeButton {
+      width: 100%;
+    }
+  
+    .chartSection {
+      padding: 1rem;
+    }
+  
+    .chart {
+      height: 300px;
+    }
+  
+    .moodGrid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Dark Mode Support */
+  @media (prefers-color-scheme: dark) {
+    .statCard,
+    .chartSection,
+    .moodCard,
+    .loading,
+    .unauthorized {
+      background: #2c3e50;
+      color: white;
+    }
+  
+    .statCard h3,
+    .moodCard p {
+      color: #ccc;
+    }
+  
+    .statValue,
+    .moodCard h3 {
+      color: white;
+    }
+  
+    .timeButton,
+    .chartTypeButton {
+      background: #2c3e50;
+      color: #777ae8;
+    }
+  
+    .timeButton:hover,
+    .chartTypeButton:hover {
+      background: #34495e;
+    }
+  
+    .moodCard.selected {
+      background: #34495e;
+    }
+  
+    .noData {
+      color: #ccc;
+    }
+  
+    .chartTooltip {
+      background: rgba(44, 62, 80, 0.95);
+      color: white;
+    }
+  }
+  .chartLoading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }
+  
+  .chart {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+    

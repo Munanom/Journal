@@ -6,81 +6,219 @@
   top: 0;
   background-color: #777ae8;
   color: white;
-  padding: 2rem 1rem;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
   z-index: 1000;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: #ffffff;
+.collapsed {
+  width: 80px;
 }
 
-.nav {
+.collapseButton {
+  position: absolute;
+  right: -12px;
+  top: 20px;
+  width: 24px;
+  height: 24px;
+  background-color: #777ae8;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.collapseButton:hover {
+  background-color: #6366e5;
+  transform: scale(1.1);
+}
+
+.sidebarHeader {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  text-align: center;
+}
+
+.logo h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, #f0f1fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+.navigation {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
 .navItem {
-  padding: 0.8rem 1rem;
-  border-radius: 8px;
-  color: #ffffff;
-  text-decoration: none;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
 .navItem:hover {
-  background-color: #8689ec;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
 }
 
-.active {
-  background-color: #6366e5;
+.navItem.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navIcon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.navText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .userSection {
-  position: absolute;
-  bottom: 2rem;
-  width: calc(100% - 2rem);
-  padding: 1rem;
-  border-top: 1px solid #8689ec;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .userInfo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
   margin-bottom: 1rem;
+}
+
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.userDetails {
+  overflow: hidden;
+}
+
+.userName {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userEmail {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .logoutButton {
   width: 100%;
   padding: 0.8rem;
-  background-color: #ff4757;
+  background-color: rgba(255, 255, 255, 0.1);
   border: none;
   border-radius: 8px;
   color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .logoutButton:hover {
-  background-color: #ff6b81;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Hover animations */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.logo:hover {
+  animation: pulse 1s infinite;
+}
+
+/* Active indicator animation */
+@keyframes slideIn {
+  from { transform: translateX(-10px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.navItem.active {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Responsive design */
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    position: fixed;
   }
 
-  .sidebarOpen {
+  .sidebar.open {
     transform: translateX(0);
+  }
+
+  .collapseButton {
+    display: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .sidebar {
+    background-color: #6366e5;
+  }
+
+  .navItem:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .navItem.active {
+    background-color: rgba(255, 255, 255, 0.25);
   }
 }
