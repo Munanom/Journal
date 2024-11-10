@@ -1,0 +1,44 @@
+.footer {
+    width: 100%;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #777ae8 0%, #6366e5 100%);
+    color: white;
+    margin-top: auto;
+  }
+  
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .copyright {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+  }
+  
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .footer {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    }
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .footer {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
