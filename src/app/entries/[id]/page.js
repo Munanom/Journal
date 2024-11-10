@@ -1,4 +1,5 @@
-// Correct import paths
+'use client';
+
 import { useAuthContext } from '@/context/AuthContext';
 import { db } from '@/firebase/config';
 import styles from './EntryDetail.module.css';
