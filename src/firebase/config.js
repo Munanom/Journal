@@ -11,9 +11,11 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
-// Initialize Firebase
+// Initialize Firebase only if it hasn't been initialized
 let app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-const auth = getAuth(app);
-const db = getFirestore(app);
+
+// Check if we're in the browser environment
+const auth = typeof window !== 'undefined' ? getAuth(app) : null;
+const db = typeof window !== 'undefined' ? getFirestore(app) : null;
 
 export { auth, db };
